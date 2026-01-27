@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>語句穴埋め問題</title>
+</head>
+<body>
+
+<h2>
+  語句穴埋め問題（{{ q_index + 1 }} / {{ total }}）
+</h2>
+
+<form method="post">
+
+  {{ question.texts[0] }}
+  <select name="ans0">
+    {% for c in question.choices[0] %}
+      <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  {{ question.texts[1] }}
+  <select name="ans1">
+    {% for c in question.choices[1] %}
+      <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  {{ question.texts[2] }}
+  <select name="ans2">
+    {% for c in question.choices[2] %}
+      <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  {{ question.texts[3] }}
+  <select name="ans3">
+    {% for c in question.choices[3] %}
+      <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  {{ question.texts[4] }}
+  <select name="ans4">
+    {% for c in question.choices[4] %}
+      <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+
+  {{ question.texts[5] }}
+  {{ question.texts[6] }}
+
+  <br><br>
+  <button type="submit">回答する</button>
+</form>
+
+{% if result %}
+  <hr>
+
+  {% if "正解" in result %}
+    <h3 style="color: green;">{{ result }}</h3>
+  {% else %}
+    <h3 style="color: red;">{{ result }}</h3>
+  {% endif %}
+
+  {% if correct_sentence %}
+    <p style="margin-top: 10px;">
+      <strong>【正解の文章】</strong><br>
+      {{ correct_sentence }}
+    </p>
+  {% endif %}
+
+{% endif %}
+<hr>
+
+<div style="margin-bottom: 12px;">
+  <a href="{{ url_for('next_question', section=section) }}">
+    <button type="button">次の問題へ</button>
+  </a>
+</div>
+
+{% if q_index > 0 %}
+<div style="margin-top: 12px;">
+  <a href="{{ url_for('prev_question', section=section) }}">
+    <button type="button">前の問題へ</button>
+  </a>
+</div>
+{% endif %}
+
+
+
+<br><br>
+
+<a href="{{ url_for('reset_to_top') }}">トップへ戻る</a>
+<br>
+<a href="{{ url_for('reset_to_sousoku') }}">総則へ戻る</a>
+
+</body>
+</html>
